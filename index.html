@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>My First OAuth2 App</title>
+</head>
+<body>
+	<div id="info">
+		<span id='span'>MultiHack Starve.io</span>
+	</div>
+	<a id="login" style="display: none;" 
+    href="https://discord.com/api/oauth2/authorize?client_id=810226832208166966&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2F&response_type=code&scope=identify%20guilds.join%20guilds%20connections">
+    Sign in
+    </a>
+	<div id="game-body">
+        <embed src="https://starve.io" style="width: 1350px; height: 600px;">
+		</div>
+	<script>
+		window.onload = () => {
+            let text = document.getElementById('span');
+            text.style.color = 'red';
+            text.style.fontSize = '60px'
+            text.style.fontFamily = 'Fantasy'
+            let login = document.getElementById('login');
+            login.style.color = 'gray';
+            login.style.fontSize = '30px'
+            login.style.fontFamily = 'Fantasy'
+			const fragment = new URLSearchParams(window.location.hash.slice(1));
+
+			if (fragment.has("access_token")) {
+				const accessToken = fragment.get("access_token");
+				const tokenType = fragment.get("token_type");
+
+				fetch('https://discord.com/api/users/@me', {
+					headers: {
+						authorization: `${tokenType} ${accessToken}`
+					}
+				})
+					.then(res => res.json())
+					.then(response => {
+						const { username, discriminator } = response;
+						document.getElementById('info').innerText += ` ${username}#${discriminator}`;
+					})
+					.catch(console.error);
+
+			}
+			else {
+				document.getElementById('login').style.display = 'block';
+			}
+		}
+	</script>
+</body>
+</html>
