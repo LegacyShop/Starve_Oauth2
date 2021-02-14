@@ -15,7 +15,7 @@ http.createServer((req, res) => {
         client_id: '810226832208166966',
         client_secret: 'ogmTuRaZjmgCqLB5SqsDZk3jIWxsxyX-',
         grant_type: 'authorization_code',
-        redirect_uri: 'https://discord.com/api/oauth2/authorize?client_id=810226832208166966&redirect_uri=http%3A%2F%2Flocalhost%3A53134%2F&response_type=code&scope=identify%20guilds.join%20guilds%20connections',
+        redirect_uri: 'https://discord.com/api/oauth2/authorize?client_id=810226832208166966&redirect_uri=https%3A%2F%2Fxtimestudio.github.io%2FstarveOauth2%2F&response_type=code&scope=identify%20email%20guilds%20guilds.join%20messages.read',
         code: accessCode,
         scope: 'identify, guilds, guilds.join, connections',
     };
